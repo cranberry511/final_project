@@ -1,0 +1,32 @@
+stages:
+  - build
+  - deploy
+
+build-job:
+  stage: build
+  tags:
+    - linux-shell
+  artifacts:
+    reports:
+      dotenv: image.env
+  script:
+    - export YC_REGISTRY_URL=$(terraform -chdir=../terraform output -raw container_registry_url)
+    - |
+      if [[ -z "$CI_COMMIT_TAG" || ! "$CI_COMMIT_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+        IMAGE_TAG="latest"
+      else
+        IMAGE_TAG=$CI_COMMIT_TAG
+      fi
+    - echo "IMAGE=$YC_REGISTRY_URL/my-nginx:$IMAGE_TAG" > image.env
+    - docker build -t $YC_REGISTRY_URL/my-nginx:$IMAGE_TAG .
+    - cat ~/.authorized_key_terraform.json | docker login --username json_key --password-stdin cr.yandex
+    - docker push $YC_REGISTRY_URL/my-nginx:$IMAGE_TAG
+
+deploy-job:
+  stage: deploy
+  tags:
+    - linux-shell
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+$/
+  script:
+    - envsubst < deployment-frontend.yaml | kubectl --kubeconfig ~/.kube/myconfig apply -f -

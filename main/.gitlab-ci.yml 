@@ -1,0 +1,17 @@
+stages:
+  - validate
+  - apply
+validate:
+  stage: validate
+  tags:
+    - linux-shell
+  script:
+    - terraform init
+    - terraform validate
+apply:
+  stage: apply
+  tags:
+    - linux-shell
+  script:
+    - terraform init
+    - terraform apply -auto-approve

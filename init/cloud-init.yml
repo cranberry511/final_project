@@ -1,0 +1,18 @@
+#cloud-config
+users:
+  - name: ubuntu
+    groups: sudo
+    shell: /bin/bash
+    sudo: ["ALL=(ALL) NOPASSWD:ALL"]
+    ssh_authorized_keys:
+      - ${ssh_public_key}
+package_update: true
+package_upgrade: false
+runcmd:
+  - curl -fsSL https://get.docker.com -o get-docker.sh
+  - sudo sh get-docker.sh
+  - curl -L "https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh" -o script.deb.sh
+  - sudo bash script.deb.sh
+  - sudo apt install -y gitlab-runner
+  - curl -L -o kubectl https://dl.k8s.io/release/v1.33.12/bin/linux/amd64/kubectl
+  - sudo mv kubectl /usr/local/bin/
