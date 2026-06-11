@@ -13,6 +13,7 @@ https://github.com/cranberry511/final_project/tree/main/main
 Создание секрета для доступа к Container Registry:
 ![Создание секрета](img/secret.jpg)
 
+Пайплайн для terraform:   
 ![Пайплайн для terraform](img/terraform_cicd.jpg)
 
 Журнал apply job:   
