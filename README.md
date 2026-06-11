@@ -39,7 +39,7 @@ https://github.com/cranberry511/final_project/tree/main/app
 Журнал сборки:   
 ![Журнал сборки](img/gitlab_build.jpg)
 
-Журнал разветывания:   
+Журнал развертывания:   
 ![Журнал развертывания](img/gitlab_deploy.jpg)
 
 
