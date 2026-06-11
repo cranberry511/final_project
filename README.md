@@ -3,7 +3,7 @@
 https://github.com/cranberry511/final_project/tree/main/init
 
 
-2. Развертывание k8s кластера с помощью Yandex Managed Service for Kubernetes, создание Yandex Container Registry и пайплайн для terraform:
+2. Развертывание k8s кластера с помощью Yandex Managed Service for Kubernetes, создание Yandex Container Registry и пайплайн для terraform:   
 https://github.com/cranberry511/final_project/tree/main/main
 
 ![Создание кластера k8s](img/cluster2.jpg)
