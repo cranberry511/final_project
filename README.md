@@ -1,5 +1,5 @@
 ## Итоговый проект
-1. Создания сервисного аккаунта, бакета, gitlab и gitlab runner.
+1. Создания сервисного аккаунта, бакета, gitlab и gitlab runner.   
 https://github.com/cranberry511/final_project/tree/main/init
 
 
